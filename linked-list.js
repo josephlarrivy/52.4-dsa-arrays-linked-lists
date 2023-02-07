@@ -18,6 +18,15 @@ class LinkedList {
     for (let val of vals) this.push(val);
   }
 
+  print() {
+    let current = this.head;
+
+    while (current !== null) {
+      console.log(current.val);
+      current = current.next;
+    }
+  }
+
   /** push(val): add new value to end of list. */
   // Appends a new node with value val to the tail.Returns undefined.
   push(val) {
@@ -31,6 +40,13 @@ class LinkedList {
   /** unshift(val): add new value to start of list. */
   // Add a new node with value val to the head.Returns undefined.
   unshift(val) {
+    let previousHead = this.head
+    let newNode = new Node(val);
+
+    this.head = newNode;
+    newNode.next = previousHead;
+    console.log(previousHead)
+    console.log(newNode)
 
   }
 
@@ -80,12 +96,14 @@ class LinkedList {
 module.exports = LinkedList;
 
 let list = new LinkedList();
-console.log(list)
 list.push(1)
-console.log(list)
 list.push(2)
-// console.log(list)
 list.push(3)
-list.push(4)
-list.push(5)
 console.log(list)
+console.log('###########')
+console.log(' ')
+list.unshift(0)
+console.log('xxxxxxxxxxx')
+console.log(' ')
+console.log(list)
+list.print()
