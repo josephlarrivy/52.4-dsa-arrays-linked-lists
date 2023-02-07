@@ -62,8 +62,28 @@ class LinkedList {
   /** pop(): return & remove last item. */
   // Remove & return tail value. Throws error if list is empty.
   pop() {
-    // let previousTail = this.tail
-    // return previousTail
+    let currentValue = this.head;
+    let count = 0;
+
+    console.log(currentValue)
+    while (count < this.length) {
+      if (currentValue.next === null) {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+        return currentValue.val
+      } else if (currentValue.next.next !== null) {
+        currentValue = currentValue.next
+        count++
+      } else if (currentValue.next.next === null) {
+        const popVal = currentValue.next.val
+        currentValue.next = null
+        this.tail = currentValue
+        this.length = this.length - 1;
+        return popVal
+      } 
+    }
+    
   }
 
   /** shift(): return & remove first item. */
@@ -102,13 +122,47 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
   // Set value of node at index position idx to val.Throws error if index is invalid.
   setAt(idx, val) {
+    let currentValue = this.head;
+    let count = 0;
 
+    if (idx > this.length - 1) {
+      console.log('ERROR')
+      return 'ERROR'
+    }
+
+    while (count < this.length) {
+      if (count !== idx) {
+        currentValue = currentValue.next
+      } else {
+        currentValue.val = val
+        // console.log(currentValue)
+      }
+      count++
+    }
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
   // Insert a new node at position idx with value val.Throws error if index is invalid.Returns undefined.
   insertAt(idx, val) {
+    // let currentValue = this.head;
+    // let count = 0;
 
+    // if (idx > this.length - 1) {
+    //   console.log('ERROR')
+    //   return 'ERROR'
+    // }
+
+    // while (count < this.length) {
+    //   if (count !== idx) {
+    //     currentValue = currentValue.next
+    //   } else {
+    //     let newNode = new Node(val);
+    //     currentValue.next = newNode;
+    //     newNode.next = currentValue.next.next
+
+    //   }
+    //   count++
+    // }
   }
 
   /** removeAt(idx): return & remove item at idx, */
@@ -126,10 +180,12 @@ class LinkedList {
 
 module.exports = LinkedList;
 
-let list = new LinkedList([5,10]);
+let list = new LinkedList([5]);
+// console.log(list)
 console.log(' ')
-
-console.log(list.tail)
+// console.log(list)
+list.pop()
+// console.log(list)
 // list.push(1)
 // list.push(2)
 // console.log(list)
