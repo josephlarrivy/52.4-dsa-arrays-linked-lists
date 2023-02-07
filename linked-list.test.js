@@ -71,7 +71,7 @@ describe("shift", function() {
     expect(lst.length).toBe(1);
 
     expect(lst.shift()).toBe(10);
-    expect(lst.tail).toBe(null);
+    expect(lst.tail.next).toBe(null);
     expect(lst.head).toBe(null);
     expect(lst.length).toBe(0);
   });

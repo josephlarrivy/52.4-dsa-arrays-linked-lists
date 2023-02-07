@@ -28,43 +28,74 @@ class LinkedList {
   }
 
   /** push(val): add new value to end of list. */
-  // Appends a new node with value val to the tail.Returns undefined.
+  // Appends a new node with value val to the tail. Returns undefined.
   push(val) {
     let newNode = new Node(val);
     if (this.head === null) this.head = newNode;
     if (this.tail !== null) this.tail.next = newNode;
     this.tail = newNode;
-    this.length = this.length +1
+    this.length = this.length + 1;
   }
 
   /** unshift(val): add new value to start of list. */
-  // Add a new node with value val to the head.Returns undefined.
+  // Add a new node with value val to the head. Returns undefined.
   unshift(val) {
-    let previousHead = this.head
     let newNode = new Node(val);
 
-    this.head = newNode;
-    newNode.next = previousHead;
-    console.log(previousHead)
     console.log(newNode)
 
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.tail.next = null;
+      this.length = 1;
+    } else {
+      let previousHead = this.head
+      this.head = newNode;
+      newNode.next = previousHead;
+      this.length = this.length + 1;
+    }
+    
+    
   }
 
   /** pop(): return & remove last item. */
-  // Remove & return tail value.Throws error if list is empty.
+  // Remove & return tail value. Throws error if list is empty.
   pop() {
-
+    // let previousTail = this.tail
+    // return previousTail
   }
 
   /** shift(): return & remove first item. */
-  // Remove & return head value.Throws error if list is empty.
+  // Remove & return head value. Throws error if list is empty.
   shift() {
+    let previousHead = this.head;
+    this.head = previousHead.next;
+    this.length = this.length - 1;
 
+    return previousHead.val;
   }
 
   /** getAt(idx): get val at idx. */
   // Retrieve value at index position idx. Throws error if index is invalid.
   getAt(idx) {
+    let currentValue = this.head;
+    let count = 0;
+
+    if (idx > this.length -1) {
+      console.log('ERROR')
+      return 'ERROR'
+    }
+
+    while (count < this.length) {
+      if (count !== idx) {
+        currentValue = currentValue.next
+      } else {
+        console.log(currentValue)
+        return currentValue.val;
+      }
+      count++
+    }
 
   }
 
@@ -95,15 +126,31 @@ class LinkedList {
 
 module.exports = LinkedList;
 
-let list = new LinkedList();
-list.push(1)
-list.push(2)
-list.push(3)
-console.log(list)
-console.log('###########')
+let list = new LinkedList([5,10]);
 console.log(' ')
-list.unshift(0)
-console.log('xxxxxxxxxxx')
-console.log(' ')
-console.log(list)
-list.print()
+
+console.log(list.tail)
+// list.push(1)
+// list.push(2)
+// console.log(list)
+// console.log('###########')
+// console.log(' ')
+// list.unshift(0)
+// console.log('xxxxxxxxxxx')
+// console.log(' ')
+// console.log(list)
+// list.shift()
+// console.log('$$$$$$$$$$$$')
+// console.log(' ')
+// console.log(list)
+// list.shift()
+// console.log('$$$$$$$$$$$$')
+// console.log(' ')
+// console.log(list)
+// list.push(3)
+// list.push(4)
+// list.push(5)
+// console.log(list)
+// console.log('$$$$$$$$$$$$')
+// console.log(' ')
+// list.getAt(1)
