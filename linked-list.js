@@ -144,24 +144,41 @@ class LinkedList {
   insertAt(idx, val) {
     let currentValue = this.head;
     let count = 0;
+    let prevNode;
+    let nextNode;
 
-    if (idx > this.length - 1) {
+    if (idx > this.length) {
       console.log('ERROR')
       return 'ERROR'
     }
 
-    while (count < this.length) {
-      if (count !== idx) {
-        currentValue = currentValue.next
-      } else {
-        const newNode = new Node(val);
-        const relocatedNode = currentValue.next.next
-        newNode.next = relocatedNode
-        currentValue.next = newNode;
-        console.log(newNode)
+    if (this.length == 0) {
+      const newNode = new Node(val);
+      this.head = newNode;
+      this.tail = newNode
+      this.length = 1;
+    } else {
+      while (count <= this.length) {
+        if (count !== idx) {
+          console.log(`count: ${count}`)
+          console.log(`idx: ${idx}`)
+          console.log(`this.length: ${this.length}`)
+          prevNode = currentValue
+          if (currentValue.next !== null) {
+            currentValue = currentValue.next
+          }
+        } else {
+          const newNode = new Node(val);
+          prevNode.next = newNode
+          newNode.next = currentValue
+          this.tail = newNode
+          this.length = this.length + 1;
+          console.log(`inserted val: ${val} at idx: ${idx}`)
+        }
+        count++
       }
-      count++
     }
+    
   }
 
   /** removeAt(idx): return & remove item at idx, */
@@ -220,11 +237,12 @@ class LinkedList {
 
 module.exports = LinkedList;
 
-let list = new LinkedList([1,2,3]);
+let list = new LinkedList([1,2,3,4]);
 // console.log(list)
 console.log(' ')
 // console.log(list)
-list.removeAt(1)
+list.insertAt(1,4)
+list.insertAt(5, 25)
 console.log(list)
 // console.log(list)
 // list.push(1)
