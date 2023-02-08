@@ -55,8 +55,6 @@ class LinkedList {
       newNode.next = previousHead;
       this.length = this.length + 1;
     }
-    
-    
   }
 
   /** pop(): return & remove last item. */
@@ -144,47 +142,90 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
   // Insert a new node at position idx with value val.Throws error if index is invalid.Returns undefined.
   insertAt(idx, val) {
-    // let currentValue = this.head;
-    // let count = 0;
+    let currentValue = this.head;
+    let count = 0;
 
-    // if (idx > this.length - 1) {
-    //   console.log('ERROR')
-    //   return 'ERROR'
-    // }
+    if (idx > this.length - 1) {
+      console.log('ERROR')
+      return 'ERROR'
+    }
 
-    // while (count < this.length) {
-    //   if (count !== idx) {
-    //     currentValue = currentValue.next
-    //   } else {
-    //     let newNode = new Node(val);
-    //     currentValue.next = newNode;
-    //     newNode.next = currentValue.next.next
-
-    //   }
-    //   count++
-    // }
+    while (count < this.length) {
+      if (count !== idx) {
+        currentValue = currentValue.next
+      } else {
+        const newNode = new Node(val);
+        const relocatedNode = currentValue.next.next
+        newNode.next = relocatedNode
+        currentValue.next = newNode;
+        console.log(newNode)
+      }
+      count++
+    }
   }
 
   /** removeAt(idx): return & remove item at idx, */
   // Remove & return value at position idx.Throws error if index is invalid.
   removeAt(idx) {
+    let currentValue = this.head;
+    let count = 0;
+    let prevValue;
 
+    if (idx > this.length - 1) {
+      console.log('ERROR')
+      return 'ERROR'
+    }
+
+    if (this.length == 1) {
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+    } else {
+      while (count < this.length) {
+        if (count !== idx) {
+          prevValue = currentValue
+          currentValue = currentValue.next
+        } else {
+          prevValue.next = currentValue.next
+          this.length = this.length - 1;
+        }
+        count++
+      }
+    }
+
+    
   }
 
   /** average(): return an average of all values in the list */
   // Given a linked list containing numbers, return the average of those numbers.
   average() {
-    
+    let currentValue = this.head;
+    let loops = 0;
+    let counter = 0;
+
+    if (this.length == 0) {
+      return 0
+    }
+
+    while (loops < this.length) {
+      console.log(currentValue.val)
+      counter += currentValue.val
+      currentValue = currentValue.next
+      loops++
+    }
+    let average = counter/loops
+    return average
   }
 }
 
 module.exports = LinkedList;
 
-let list = new LinkedList([5]);
+let list = new LinkedList([1,2,3]);
 // console.log(list)
 console.log(' ')
 // console.log(list)
-list.pop()
+list.removeAt(1)
+console.log(list)
 // console.log(list)
 // list.push(1)
 // list.push(2)

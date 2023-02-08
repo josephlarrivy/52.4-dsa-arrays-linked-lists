@@ -125,6 +125,15 @@ describe("insertAt", function() {
 });
 
 describe("removeAt", function() {
+  it("removes from 5-item list", function () {
+    let lst = new LinkedList(["a","b","c","d","e"]);
+
+    lst.removeAt(2);
+    expect(lst.length).toBe(4);
+    expect(lst.head.val).toBe("a");
+    expect(lst.tail.val).toBe("e");
+  });
+
   it("removes from 1-item list", function() {
     let lst = new LinkedList(["a"]);
 
